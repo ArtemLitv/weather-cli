@@ -26,3 +26,33 @@ export const showLoader = () => {
         index++;
     }, 300);
 };
+
+export const showWeather = (data) => {
+    console.log(`${chalk.bgYellow(" Weather ")}
+    \r${data.weather[0].main} ${getIcon(data.weather[0].icon)}
+    \rTemp: ${data.main.temp}\t Pressure: ${data.main.pressure}
+    `)
+}
+
+const getIcon = (iconCode) => {
+	switch (iconCode.slice(0, -1)) {
+		case '01':
+			return '☀️';
+		case '02':
+			return '🌤️';
+		case '03':
+			return '☁️';
+		case '04':
+			return '☁️';
+		case '09':
+			return '🌧️';
+		case '10':
+			return '🌦️';
+		case '11':
+			return '🌩️';
+		case '13':
+			return '❄️';
+		case '50':
+			return '🌫️';
+	}
+};

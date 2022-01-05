@@ -1,8 +1,14 @@
 import { keysModel } from "../models/keys.model.js";
-import { writeMan, showLoader } from "./log.service.js";
-import { getUserData, storeUserData } from "./store-user-data.service.js";
+import { getWeather } from "./api.service.js";
+import { writeMan, showLoader, showWeather } from "./log.service.js";
+import { storeUserData } from "./store-user-data.service.js";
 
 export const router = async (args) => {
+    if (!args.length) {
+        const weatherData = await getWeather();
+        showWeather(weatherData);
+    }
+
     for (const [key, value] of args) {
         switch (key) {
             case keysModel.LOADER.shortKey:
@@ -20,7 +26,9 @@ export const router = async (args) => {
                 storeUserData(keysModel.SET_TOKEN.key, value);
                 break;
             default:
-                throw new Error(`Unregistered key <${key}>. To see all flags use flag -h`);
+                throw new Error(
+                    `Unregistered key <${key}>. To see all flags use flag -h`
+                );
         }
     }
 };
