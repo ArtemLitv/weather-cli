@@ -3,10 +3,6 @@ export const keysModel = {
         shortKey: 'h',
         description: 'Show helper'
     },
-    LOADER: {
-        shortKey: 'l',
-        description: 'Run Loader'
-    },
     SET_CITY: {
         shortKey: 'c',
         key: 'city',

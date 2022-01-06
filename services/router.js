@@ -1,19 +1,18 @@
 import { keysModel } from "../models/keys.model.js";
 import { getWeather } from "./api.service.js";
-import { writeMan, showLoader, showWeather } from "./log.service.js";
+import { writeMan, showLoader, showWeather, stopLoader } from "./log.service.js";
 import { storeUserData } from "./store-user-data.service.js";
 
 export const router = async (args) => {
     if (!args.length) {
+        showLoader();
         const weatherData = await getWeather();
+        stopLoader();
         showWeather(weatherData);
     }
 
     for (const [key, value] of args) {
         switch (key) {
-            case keysModel.LOADER.shortKey:
-                showLoader();
-                break;
             case keysModel.HELP.shortKey:
                 writeMan();
                 break;
